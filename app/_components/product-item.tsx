@@ -1,4 +1,7 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+
+import { useCartContext } from '@/app/_context/cart.context'
 
 import { Button } from '@/shadcn/ui/button'
 import {
@@ -18,14 +21,64 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/shadcn/ui/select'
-import Image from 'next/image'
 
 export function ProductItem({
   product
 }: {
   product: IProductItem
 }) {
+  const { cartContent, setCartContent } = useCartContext()
+  const [quantity, setQuantity] = useState(1)
+  const [variant, setVariant] = useState<number | null>(0)
+
   const hasMultipleVariants = product.variants.length > 1
+
+  function createLineItem({
+    product,
+    quantity,
+    variant
+  }: {
+    product: IProductItem
+    quantity: number
+    variant: number
+  }) {
+    const lineItem: ILineItem = {
+      product_id: product.id.toString(),
+      variant_id: product.variants[variant].id.toString(),
+      custom: true,
+      price: product.variants[variant].price,
+      image: product.image?.src.toString(),
+      title: product.title,
+      quantity
+    }
+
+    return lineItem
+  }
+
+  function handleAddToCart() {
+    const newLIneItem: ILineItem = createLineItem({
+      product,
+      quantity,
+      variant: variant || 0
+    })
+
+    const prevCart = cartContent ?? []
+
+    const newCartContent = [...prevCart, newLIneItem]
+    setCartContent(newCartContent)
+  }
+
+  useEffect(() => {
+    console.log('quantity changed: ', quantity)
+  }, [quantity])
+
+  useEffect(() => {
+    console.log('cartContent changed: ', cartContent)
+  }, [cartContent])
+
+  useEffect(() => {
+    console.log('variant changed: ', variant)
+  }, [variant])
 
   return (
     <Card className='flex-col-tl w-full h-auto rounded-md border-none bg-slate-200 p-ms gap-ms'>
@@ -56,16 +109,23 @@ export function ProductItem({
                 <Label htmlFor='framework'>
                   Product Variant
                 </Label>
-                <Select>
+                <Select
+                  onValueChange={(value) =>
+                    setVariant(Number(value))
+                  }
+                >
                   <SelectTrigger id='variant'>
                     <SelectValue placeholder='Select' />
                   </SelectTrigger>
                   <SelectContent position='popper'>
                     {product.variants.map(
-                      (variant: IProductVariant) => {
+                      (
+                        variant: IProductVariant,
+                        idx: number
+                      ) => {
                         return (
                           <SelectItem
-                            value={variant.title.toString()}
+                            value={idx.toString()}
                             key={variant.id.toString()}
                           >
                             {variant.title}
@@ -86,12 +146,18 @@ export function ProductItem({
             id='name'
             className='w-[5ch] px-2'
             placeholder='1'
+            value={quantity}
+            onChange={(e) => {
+              setQuantity(Number(e.target.value))
+            }}
             type='number'
             min={1}
           />
           <Label htmlFor='name'>Quantity</Label>
         </div>
-        <Button variant={'default'}>Add</Button>
+        <Button onClick={handleAddToCart} variant={'default'}>
+          Add
+        </Button>
       </CardFooter>
     </Card>
   )
