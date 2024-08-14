@@ -5,6 +5,8 @@
     "theme",
     "API",
     "product",
-    "home"
+    "home",
+    "app-state",
+    "cart"
   ]
 }
