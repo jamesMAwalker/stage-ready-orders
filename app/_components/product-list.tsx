@@ -1,6 +1,5 @@
 'use client'
 
-import { Card } from '@/shadcn/ui/card'
 import { useEffect, useState } from 'react'
 import { ProductItem } from './product-item'
 
@@ -19,7 +18,6 @@ export const ProductList = () => {
       })
 
       const data = await res.json()
-      console.log('🚀 ~ getProducts ~ data:', data)
 
       const activeProducts = data.products.filter(
         (p: IProductItem) => p.status === 'active'
@@ -29,6 +27,8 @@ export const ProductList = () => {
     }
     getProducts()
   }, [])
+
+
 
   return (
     <section className='flex-col-tl gap-md full p-md rounded-md'>
