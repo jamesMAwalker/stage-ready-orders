@@ -1,3 +1,15 @@
+// * PRODUCT *
+
+declare interface ILineItem {
+  product_id: String,
+  variant_id: String,
+  custom: boolean,
+  price: String,
+  image: String,
+  title: String,
+  quantity: number
+}
+
 declare interface IProductItem {
   id: Number
   title: String
@@ -28,8 +40,8 @@ declare interface IProductVariant {
   inventory_policy: String
   compare_at_price: String | null
   option1: String
-  option2: String| null
-  option3: String| null
+  option2: String | null
+  option3: String | null
   created_at: String
   updated_at: String
   taxable: Boolean
@@ -38,14 +50,14 @@ declare interface IProductVariant {
   grams: Number
   inventory_management: String
   requires_shipping: Boolean
-  sku: String| ''
+  sku: String | ''
   weight: Number
   weight_unit: String
   inventory_item_id: Number
   inventory_quantity: Number
   old_inventory_quantity: Number
   admin_graphql_api_id: String
-  image_id: String| null
+  image_id: String | null
 }
 
 declare interface IProductOption {
@@ -68,4 +80,30 @@ declare interface IProductImage {
   height: Number
   src: String
   variant_ids: String[]
+}
+
+
+// * CUSTOMER *
+
+declare interface ICustomer {
+  "customer": {
+    "email": String
+  },
+  "use_customer_default_address": Boolean,
+  "shipping_address": {
+    "address1": String,
+    "address2": String,
+    "city": String,
+    "province": String,
+    "country": String,
+    "zip": String
+  },
+  "billing_address": {
+    "address1": String,
+    "address2": String,
+    "city": String,
+    "province": String,
+    "country": String,
+    "zip": String
+  },
 }
