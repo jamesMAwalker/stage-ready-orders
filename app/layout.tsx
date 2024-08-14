@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { twm } from "@/utils/twm";
+import { Providers } from "./_context";
 
 import "@/style/global.scss";
 
@@ -18,17 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={twm(
-          inter.className,
-          'BODY flex-col-sbc overflow-clip min-h-screen h-screen'
-        )}
-      >
-        <div className='LAYOUT_INNER overflow-y-scroll h-full w-[var(--layout-width)] flex-tl border-r border-l border-neutral-300 px-md pb-[25vh]'>
-          {children}
-        </div>
-      </body>
-    </html>
+    <Providers>
+      <html lang='en'>
+        <body
+          className={twm(
+            inter.className,
+            'BODY flex-col-sbc overflow-clip min-h-screen h-screen'
+          )}
+        >
+          <div className='LAYOUT_INNER overflow-y-scroll h-full w-[var(--layout-width)] flex-tl border-r border-l border-neutral-300 px-md pb-[25vh]'>
+            {children}
+          </div>
+        </body>
+      </html>
+    </Providers>
   )
 }
