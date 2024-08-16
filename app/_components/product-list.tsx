@@ -28,12 +28,10 @@ export const ProductList = () => {
     getProducts()
   }, [])
 
-
-
   return (
-    <section className='flex-col-tl gap-md full p-md rounded-md'>
+    <section className='flex-col-tl gap-md full lg:p-md rounded-md'>
       <h2 className='text-2xl font-bold'>ProductList</h2>
-      <div className='grid grid-cols-3 gap-md auto-rows-auto w-full'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-md auto-rows-auto w-full'>
         {products?.map((product: IProductItem) => {
           return (
             <ProductItem

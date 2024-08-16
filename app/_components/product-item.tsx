@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import { useCartContext } from '@/app/_context/cart.context'
 
+import { useToast } from '@/shadcn/ui/use-toast'
 import { Button } from '@/shadcn/ui/button'
 import {
   Card,
@@ -30,6 +31,7 @@ export function ProductItem({
   const { cartContent, setCartContent } = useCartContext()
   const [quantity, setQuantity] = useState(1)
   const [variant, setVariant] = useState<number | null>(0)
+  const { toast } = useToast()
 
   const hasMultipleVariants = product.variants.length > 1
 
@@ -66,6 +68,10 @@ export function ProductItem({
 
     const newCartContent = [...prevCart, newLIneItem]
     setCartContent(newCartContent)
+    toast({
+      title: 'Item Added!',
+      description: `${newLIneItem.title}`
+    })
   }
 
   useEffect(() => {
