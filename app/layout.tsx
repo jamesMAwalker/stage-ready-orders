@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { twm } from "@/utils/twm";
+import { twm } from "@/lib/twm";
 import { Providers } from "./_context";
+
+import { Toaster } from "@/shadcn/ui/toaster";
 
 import "@/style/global.scss";
 
@@ -30,6 +32,7 @@ export default function RootLayout({
           <div className='LAYOUT_INNER overflow-y-scroll h-full w-[var(--layout-width)] flex-tl border-r border-l border-neutral-300 px-md pb-[25vh]'>
             {children}
           </div>
+          <Toaster />
         </body>
       </html>
     </Providers>
