@@ -19,7 +19,7 @@ import {
 export function CartMenu() {
   const { customer } = useCustomerContext()
   const { cartContent } = useCartContext()
-
+  
   function createDraftOrder({
     customerData,
     currentCart
@@ -78,7 +78,7 @@ export function CartMenu() {
             you&#39;re ready to submit your order.
           </SheetDescription>
         </SheetHeader>
-        <div className='flex-col-tl max-h-[70vh] overflow-scroll divide-dashed divide-y-[.5px] divide-neutral-400 gap-sm p-sm bg-neutral-100 rounded-md w-full'>
+        {!!cartContent?.length && <div className='flex-col-tl max-h-[70vh] overflow-scroll divide-dashed divide-y-[.5px] divide-neutral-400 gap-sm p-sm bg-neutral-100 rounded-md w-full'>
           {cartContent?.map((item: ILineItem) => {
             return (
               <CartItem
@@ -87,15 +87,16 @@ export function CartMenu() {
               />
             )
           })}
-        </div>
+        </div>}
         <SheetFooter className='w-full'>
           <SheetClose asChild>
             <Button
               type='submit'
               className='w-full'
               onClick={handleSumbit}
+              disabled={!cartContent?.length}
             >
-              Submit Order
+              {!cartContent?.length ? 'Add an Item to Submit' : 'Submit Order'} 
             </Button>
           </SheetClose>
         </SheetFooter>
@@ -105,7 +106,6 @@ export function CartMenu() {
 }
 
 const CartItem = ({ item }: { item: ILineItem }) => {
-  // console.log('🚀 ~ CartItem ~ item:', item)
   return (
     <div className='flex-col-tl pl-sm border-neutral-300 gap-sm w-full'>
       <Label
