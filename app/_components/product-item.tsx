@@ -74,18 +74,6 @@ export function ProductItem({
     })
   }
 
-  useEffect(() => {
-    console.log('quantity changed: ', quantity)
-  }, [quantity])
-
-  useEffect(() => {
-    console.log('cartContent changed: ', cartContent)
-  }, [cartContent])
-
-  useEffect(() => {
-    console.log('variant changed: ', variant)
-  }, [variant])
-
   return (
     <Card className='flex-col-tl w-full h-auto rounded-md border-none bg-slate-200 p-ms gap-ms'>
       <div className='IMG_WRAP rounded-md overflow-clip relative w-full aspect-square'>
