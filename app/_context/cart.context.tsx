@@ -9,6 +9,7 @@ import {
   useMemo,
   useState
 } from 'react'
+import { CART_LS_KEY } from './helpers/_keys'
 
 const CartState = createContext<{
   cartContent: ILineItem[] | null
@@ -34,14 +35,14 @@ export function CartProvider({
   >(null)
 
   function checkLSforCart() {
-    const cart = localStorage.getItem('cart')
+    const cart = localStorage.getItem(CART_LS_KEY)
     if (cart) {
       setCartContent(JSON.parse(cart))
     }
   }
 
   function updateCartLS() {
-    localStorage.setItem('cart', JSON.stringify(cartContent))
+    localStorage.setItem(CART_LS_KEY, JSON.stringify(cartContent))
   }
 
   useEffect(() => {
