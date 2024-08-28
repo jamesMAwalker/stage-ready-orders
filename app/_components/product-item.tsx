@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 
 import { useCartContext } from '@/app/_context/cart.context'
@@ -8,11 +8,11 @@ import { Button } from '@/shadcn/ui/button'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
 } from '@/shadcn/ui/card'
+import { Skeleton } from '@/shadcn/ui/skeleton'
 import { Input } from '@/shadcn/ui/input'
 import { Label } from '@/shadcn/ui/label'
 import {
@@ -49,7 +49,7 @@ export function ProductItem({
       variant_id: product.variants[variant].id.toString(),
       custom: true,
       price: product.variants[variant].price,
-      image: product.image?.src.toString(),
+      image: product.image?.src, 
       title: product.title,
       quantity
     }
@@ -58,6 +58,25 @@ export function ProductItem({
   }
 
   function handleAddToCart() {
+    // Update Quantity
+    const itemInCart = cartContent?.find(
+      (item: ILineItem) =>
+        item.product_id === product.id.toString()
+    )
+
+    if (itemInCart && cartContent?.length) {
+      itemInCart.quantity += 1
+      setCartContent([...cartContent])
+
+      toast({
+        title: 'Quantity Updated!',
+        description: `${itemInCart.title} × ${itemInCart.quantity}`
+      })
+
+      return
+    }
+
+    // New Item
     const newLIneItem: ILineItem = createLineItem({
       product,
       quantity,
@@ -154,5 +173,17 @@ export function ProductItem({
         </Button>
       </CardFooter>
     </Card>
+  )
+}
+
+ProductItem.Skeleton = function ProductItemSkeleton() {
+  return (
+    <div className='ITEM_SKELETON flex flex-col w-full h-auto'>
+      <Skeleton className='h-[250px] w-full rounded-md' />
+      <div className='space-y-2'>
+        <Skeleton className='h-4 w-[250px]' />
+        <Skeleton className='h-4 w-[200px]' />
+      </div>
+    </div>
   )
 }

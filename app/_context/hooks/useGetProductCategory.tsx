@@ -1,4 +1,7 @@
-import { PRODUCT_LS_KEY } from '../helpers/_keys'
+'use client';
+
+import { PRODUCT_LS_KEY } from "../helpers/_keys";
+
 
 export function useGetProductCategoryFromLS(
   categoryName: string
@@ -10,7 +13,7 @@ export function useGetProductCategoryFromLS(
     if (!parsedProducts) return null;
     
     return parsedProducts.find(
-      (cat: any) => cat.title === categoryName
+      (cat: any) => cat.id === categoryName
     )
   } else {
     throw new Error('Products not found in local storage')

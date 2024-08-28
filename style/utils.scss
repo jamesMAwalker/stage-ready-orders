@@ -80,3 +80,12 @@
     transform: translate(-50%, -50%);
   }
 }
+
+// Clerk
+// .cl-footer {
+//   display: none;
+// }
+.cl-cardBox {
+  box-shadow: none;
+  border: .5px solid rgb(var(--color-brand-primary) / .25)
+}

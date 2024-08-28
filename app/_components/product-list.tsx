@@ -1,4 +1,3 @@
-import React from 'react'
 import { ProductItem } from './product-item'
 
 export const ProductList = ({ products }: { products: IProductItem[] }) => {
