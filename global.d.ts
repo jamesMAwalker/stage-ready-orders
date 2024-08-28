@@ -5,29 +5,41 @@ declare interface ILineItem {
   variant_id: String,
   custom: boolean,
   price: String,
-  image: String,
+  image: IProductImage | String,
   title: String,
   quantity: number
 }
 
+declare interface IProductCategory {
+  id: String,
+  title: String,
+  image: String,
+  products: IProductItem[]
+}
+
 declare interface IProductItem {
   id: Number
+  product_id: String
+  variant_id: String
   title: String
-  body_html: String
-  vendor: String
-  product_type: String
-  created_at: String
-  handle: String
-  updated_at: String
-  published_at: String
-  template_suffix: String | ''
-  published_scope: String
-  tags: String
-  status: String
-  admin_graphql_api_id: String
+  custom: boolean
+  price: String
+  quantity: Number
+  body_html?: String
+  vendor?: String
+  product_type?: String
+  created_at?: String
+  handle?: String
+  updated_at?: String
+  published_at?: String
+  template_suffix?: String | ''
+  published_scope?: String
+  tags?: String
+  status?: String
+  admin_graphql_api_id?: String
   variants: IProductVariant[]
-  options: IProductOption[]
-  images: IProductImage[]
+  options?: IProductOption[]
+  images?: IProductImage[]
   image: IProductImage
 }
 
@@ -85,7 +97,8 @@ declare interface IProductImage {
 
 // * CUSTOMER *
 
-declare interface ICustomer {
+
+declare interface IShopifyCustomer {
   "customer": {
     "email": String
   },

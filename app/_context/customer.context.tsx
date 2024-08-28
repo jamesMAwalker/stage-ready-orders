@@ -8,10 +8,14 @@ import {
   useMemo,
   useState
 } from 'react'
-import { customer1 } from '../_mock-customers/customer-1'
+import { redirect } from 'next/navigation'
+import { useUser } from '@clerk/clerk-react'
+import { useClerk } from '@clerk/nextjs'
+
+import { useToast } from '@/shadcn/ui/use-toast'
 
 const CustomerState = createContext<{
-  customer: ICustomer | null
+  customer: any | null
 } | null>(null)
 
 export function useCustomerContext() {
@@ -30,9 +34,10 @@ export function CustomerProvider({
 }: {
   children: ReactNode
 }) {
-  const [customer, setCustomer] = useState<ICustomer | null>(
-    null
-  )
+  const { toast } = useToast()
+  const { signOut } = useClerk()
+  const { isSignedIn, user, isLoaded } = useUser()
+  const [customer, setCustomer] = useState<any | null>(null)
 
   const value = useMemo(
     () => ({
@@ -43,11 +48,45 @@ export function CustomerProvider({
   )
 
   useEffect(() => {
-    if (customer === null) {
-      setCustomer(customer1)
+    if (isSignedIn && isLoaded) {
+      const email =
+        user?.primaryEmailAddress?.emailAddress ||
+        user.emailAddresses[0].emailAddress
+
+      {
+        ;(async () => {
+          try {
+            const res = await fetch('/api/customers', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                email
+              })
+            })
+            const data = await res.json()
+
+            if (!data.shopify_customer) {
+              toast({
+                variant: "destructive",
+                title: 'Sign In Error!',
+                description: `The email ${email} is not a Stage Ready program member. Redirecting to sign in...` 
+              })
+
+              setTimeout(() => {
+                signOut({ redirectUrl: '/sign-in' })
+              }, 5000)
+            }
+
+            setCustomer(data.shopify_customer)
+          } catch (error) {
+            console.log('🚀 ~ ; ~ error:', error)
+          }
+        })()
+      }
     }
-  }, [])
-  
+  }, [isSignedIn, isLoaded])
 
   return (
     <CustomerState.Provider value={value}>

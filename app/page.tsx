@@ -1,25 +1,44 @@
-import { ProductCategoryList } from "./_components/product-category-list";
+'use client';
 
-export default async function Home() {
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import { useUser } from '@clerk/nextjs'
+
+import { Button } from '@/shadcn/ui/button';
+
+export default function Home() {
+  const { isSignedIn, isLoaded } = useUser()
+
+  if (!isLoaded) {
+    return <div>Loading...</div>
+  }
+
+  if (isSignedIn) {
+    redirect('/orders')
+  }
 
   return (
     <>
-      <h1 className='text-4xl'>
-        <span className='font-bold'>Standing O Cosmetics: </span>
-        <span className='font-light'>
-          {' '}
-          Stage Ready Order Form
-        </span>
-      </h1>
-      <p className='text-lg text-left lg:text-center w'>
-        Welcome Stage Ready customer! To get started, select from
-        the products below. When you&#39;re ready to submit your
-        order, click the submit button. Your order will be saved,
-        and we will contact you for confirmation after applying
-        your program discount.
-      </p>
-      <ProductCategoryList />
+      <div className='SIGNIN_WRAP  w-full h-[80vh] flex-col-c gap-lg'>
+        <h1 className='flex-col-c gap-md'>
+          <span>
+            <img
+              src='/images/soc-logo.png'
+              alt='logo'
+              className=' h-auto'
+            />
+          </span>
+          <span className='text-4xl font-bold'>
+            Welcome to Standing O Cosmetics
+          </span>
+          <span className='text-2xl uppercase'>
+            Stage Ready Program Ordering
+          </span>
+          <Link href='/sign-up'>
+            <Button>Get Started</Button>
+          </Link>
+        </h1>
+      </div>
     </>
   )
 }
- 

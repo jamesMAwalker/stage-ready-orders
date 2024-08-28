@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import { SignedIn } from '@clerk/nextjs'
 
 import { twm } from '@/lib/twm'
 import { Providers } from './_context'
@@ -28,7 +29,6 @@ export default function RootLayout({
       <html lang='en'>
         <body
           className={twm(
-            // inter.className,
             poppins.className,
             'BODY relative flex-col-sbc overflow-clip min-h-screen h-screen'
           )}
@@ -39,7 +39,9 @@ export default function RootLayout({
               {children}
             </main>
           </div>
-          <MenuFooter />
+          <SignedIn>
+            <MenuFooter />
+          </SignedIn>
           <Toaster />
         </body>
       </html>

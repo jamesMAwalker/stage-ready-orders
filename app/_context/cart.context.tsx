@@ -2,7 +2,6 @@
 
 import {
   ReactNode,
-  Suspense,
   createContext,
   useContext,
   useEffect,
@@ -13,7 +12,7 @@ import { CART_LS_KEY } from './helpers/_keys'
 
 const CartState = createContext<{
   cartContent: ILineItem[] | null
-  setCartContent: (arg: ILineItem[]) => void
+  setCartContent: (arg: ILineItem[] | null) => void
 } | null>(null)
 
 export function useCartContext() {
