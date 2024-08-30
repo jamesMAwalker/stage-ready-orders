@@ -34,7 +34,7 @@ export default function RootLayout({
           )}
         >
           <TopNav />
-          <div className='LAYOUT_OUTER overflow-y-scroll h-full w-[var(--layout-width)] flex-tl border-r border-l border-neutral-300 px-md pb-[25vh]'>
+          <div className='LAYOUT_OUTER overflow-y-scroll h-full w-[var(--layout-width)] flex-tl border-r border-l border-neutral-300 px-md pb-[25vh] pt-xl'>
             <main className='LAYOUT_INNER w-full flex min-h-screen flex-col items-center justify-start gap-8 p-md pt-xxl'>
               {children}
             </main>
