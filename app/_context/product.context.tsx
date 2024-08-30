@@ -56,7 +56,7 @@ export function ProductProvider({
   })
 
   const { data, isSuccess, isLoading, isError } = useQuery({
-    queryKey: ['products'],
+    queryKey: ['products', customer?.id],
     queryFn: getProducts,
     enabled: customer !== null
   })
@@ -75,10 +75,10 @@ export function ProductProvider({
   }, [customer, isSuccess, isLoading, data, isError])
 
   useEffect(() => {
-    if (product.categories) {
+    if (product.categories && customer) {
       setProductsByCategoryLS(product.categories)
     }
-  }, [product.categories])
+  }, [product.categories, customer])
 
   const value = useMemo(
     () => ({

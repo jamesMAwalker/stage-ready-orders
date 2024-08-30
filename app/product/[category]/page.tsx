@@ -4,33 +4,36 @@ import React, { useEffect, useState } from 'react'
 
 import { ProductList } from '@/app/_components/product-list'
 import { getProductCategoryFromLS } from '@/app/_context/helpers/get-product-category-LS'
+import { useProductContext } from '@/app/_context/product.context'
 
 const ProductCategoryPage = ({
   params
 }: {
   params: { category: string }
 }) => {
-  const [productCategory, setProductCategory] = useState<IProductCategory | null>(null)
-  
-  
+  const { product } = useProductContext()
+  const [productCategory, setProductCategory] =
+    useState<IProductCategory | null>(null)
+
   useEffect(() => {
-    const categoryData = getProductCategoryFromLS(
-      params.category
-    )
-  
-    if (categoryData) {
-      setProductCategory(categoryData)
+    if (product.status.success) {
+      const categoryData = getProductCategoryFromLS(
+        params.category
+      )
+
+      if (categoryData) {
+        setProductCategory(categoryData)
+      }
     }
-  }, [params.category])
-  
+  }, [params.category, product.status.success])
 
   return (
     <div className='pt-xl full flex-col-tl gap-md'>
-      <h1 className='w-full text-4xl font-bold'>{productCategory?.title} Collection</h1>  
+      <h1 className='w-full text-4xl font-bold'>
+        {productCategory?.title} Collection
+      </h1>
       {productCategory && (
-        <ProductList
-          products={productCategory.products}
-        />
+        <ProductList products={productCategory.products} />
       )}
     </div>
   )
