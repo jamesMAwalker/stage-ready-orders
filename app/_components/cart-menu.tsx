@@ -138,24 +138,23 @@ export function CartMenu() {
             })}
           </div>
         )}
-        {cartContent !== null || (cartContent as any)?.length > 0 && (
+        {!!cartContent?.length && (
           <div className='TOTAL_PRICE w-full p-sm flex-col-tl bg-green-800/10 text-green-950 rounded-md'>
             Order Total: ${cartTotal}.00
           </div>
         )}
         <SheetFooter className='w-full'>
-            <Button
-              type='submit'
-              className='w-full'
-              onClick={handleSumbit}
-              disabled={!cartContent?.length}
-            >
-              {!cartContent?.length
-                ? 'Add an Item to Submit'
-                : 'Submit Order'}
-            </Button>
-          <SheetClose asChild>
-          </SheetClose>
+          <Button
+            type='submit'
+            className='w-full'
+            onClick={handleSumbit}
+            disabled={!cartContent?.length}
+          >
+            {!cartContent?.length
+              ? 'Add an Item to Submit'
+              : 'Submit Order'}
+          </Button>
+          <SheetClose asChild></SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>
