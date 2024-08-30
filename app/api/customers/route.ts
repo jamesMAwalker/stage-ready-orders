@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { ELoginErrors } from "@/enums"
+import { checkStageReady } from "@/helpers/check-stage-ready"
 
 const storeUrl = process.env.SHOPIFY_STORE_DOMAIN
 const password = process.env.SHOPIFY_ADMIN_API_PASSWORD as string
@@ -19,9 +20,7 @@ export async function POST(req: Request) {
     const data = await res.json()
 
     const shopify_customer = data.customers[0]
-    const isStageReady = ['STUDIOSTAGEREADY', 'TEAMSTAGEREADY', 'STUDIOOWNER', 'STUDIO OWNER'].some(tag => {
-      return shopify_customer.tags.includes(tag)
-    })
+    const isStageReady = checkStageReady(shopify_customer)
 
     if (!shopify_customer) {
       throw new Error(ELoginErrors.NOT_A_SHOPIFY_CUSTOMER.code)

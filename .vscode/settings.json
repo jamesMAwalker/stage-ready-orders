@@ -7,6 +7,9 @@
     "product",
     "home",
     "app-state",
-    "cart"
+    "cart",
+    "layout",
+    "auth",
+    "email"
   ]
 }
