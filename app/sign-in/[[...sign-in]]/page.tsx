@@ -3,6 +3,7 @@
 import React from 'react'
 import { SignIn } from '@clerk/nextjs'
 import { useErrorContext } from '@/app/_context/errors.context'
+import { Button } from '@/shadcn/ui/button';
 
 const SignInPage = () => {
   const { error } = useErrorContext()
@@ -39,11 +40,18 @@ const SignInPage = () => {
           </p>
         </div>
         <SignIn />
-          {error && (
-            <p className='text-xl w-2/3  text-center font-bold text-red-500'>
-              {error.message}
-            </p>
-          )}
+        {error && (
+          <p className='flex-col-c gap-md text-xl w-2/3  text-center font-bold text-red-500'>
+            {error.message}
+            {error.link && (
+              <a href={error.link} className='underline'>
+                <Button variant={'default'}>
+                  Apply For The Stage Ready Program
+                </Button>
+              </a>
+            )}
+          </p>
+        )}
       </div>
     </>
   )
