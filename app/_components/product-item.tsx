@@ -30,10 +30,11 @@ export function ProductItem({
 }) {
   const { cartContent, setCartContent } = useCartContext()
   const [quantity, setQuantity] = useState(1)
-  const [variant, setVariant] = useState<number | null>(0)
+  const [variant, setVariant] = useState<number>(0)
   const { toast } = useToast()
 
   const hasMultipleVariants = product.variants.length > 1
+  const price = product.variants[variant].price
 
   function createLineItem({
     product,
@@ -49,7 +50,7 @@ export function ProductItem({
       variant_id: product.variants[variant].id.toString(),
       custom: true,
       price: product.variants[variant].price,
-      image: product.image?.src, 
+      image: product.image?.src,
       title: product.title,
       quantity
     }
@@ -109,11 +110,16 @@ export function ProductItem({
           fill
         />
       </div>
-      <CardHeader>
-        <CardTitle className='text-lg font-bold'>
-          {product.title}
-        </CardTitle>
-      </CardHeader>
+      <div className='HEADER_WRAP flex-col-tl py-sm gap-sm'>
+        <CardHeader className='p-0'>
+          <CardTitle className='text-lg font-bold'>
+            {product.title}
+          </CardTitle>
+        </CardHeader>
+        <p className='PRICE text-neutral-500 font-bold'>
+          ${price}
+        </p>
+      </div>
       {hasMultipleVariants && (
         <CardContent>
           <form>

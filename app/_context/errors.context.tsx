@@ -48,7 +48,6 @@ export function ErrorProvider({
     if (errorData) {
       setError(errorData)
       setTimeout(() => {
-        console.log('remove error from local storage')
         localStorage.removeItem(ERROR_LS_KEY)
       }, errorTimeOut)
     }

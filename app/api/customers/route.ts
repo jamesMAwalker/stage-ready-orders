@@ -36,7 +36,6 @@ export async function POST(req: Request) {
     })
   } catch (error: any) {
     const errorObj = ELoginErrors[error.message as string]
-    console.log("🚀 ~ POST ~ errorObj:", errorObj)
 
     return NextResponse.json({
       status: 500,
