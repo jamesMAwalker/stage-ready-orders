@@ -116,6 +116,7 @@ declare interface IShopifyCustomer {
     "country": String,
     "zip": String
   },
+  tags?: String
 }
 
 // * ERROR *
