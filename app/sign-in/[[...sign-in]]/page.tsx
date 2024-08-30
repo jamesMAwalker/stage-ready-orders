@@ -1,7 +1,12 @@
+'use client';
+
 import React from 'react'
 import { SignIn } from '@clerk/nextjs'
+import { useErrorContext } from '@/app/_context/errors.context'
 
 const SignInPage = () => {
+  const { error } = useErrorContext()
+
   return (
     <>
       <div className='SIGNIN_WRAP  w-full h-[80vh] flex-col-c gap-lg'>
@@ -34,6 +39,11 @@ const SignInPage = () => {
           </p>
         </div>
         <SignIn />
+          {error && (
+            <p className='text-xl w-2/3  text-center font-bold text-red-500'>
+              {error.message}
+            </p>
+          )}
       </div>
     </>
   )

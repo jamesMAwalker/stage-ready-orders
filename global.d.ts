@@ -1,5 +1,4 @@
 // * PRODUCT *
-
 declare interface ILineItem {
   product_id: String,
   variant_id: String,
@@ -96,8 +95,6 @@ declare interface IProductImage {
 
 
 // * CUSTOMER *
-
-
 declare interface IShopifyCustomer {
   "customer": {
     "email": String
@@ -119,4 +116,13 @@ declare interface IShopifyCustomer {
     "country": String,
     "zip": String
   },
+}
+
+// * ERROR *
+declare interface IError {
+  code: string 
+  title: string 
+  message: string 
+  link?: string 
+  status?: number 
 }
