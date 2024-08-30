@@ -57,7 +57,8 @@ export function ProductProvider({
 
   const { data, isSuccess, isLoading, isError } = useQuery({
     queryKey: ['products'],
-    queryFn: getProducts
+    queryFn: getProducts,
+    enabled: customer !== null
   })
 
   useEffect(() => {

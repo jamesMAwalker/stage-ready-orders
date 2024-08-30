@@ -27,7 +27,7 @@ export const ProductCategoryList = () => {
     <section className='flex-col-tl gap-md full lg:p-md rounded-md'>
       <h2 className='text-2xl font-bold'>Product Categories</h2>
       <div className='w-full grid grid-cols-1 lg:grid-cols-2 auto-rows-auto gap-md'>
-        {status.loading ? (
+        {!categories?.length ? (
           <>
             {Array.from({ length: 8 }).map((_: any) => {
               return (

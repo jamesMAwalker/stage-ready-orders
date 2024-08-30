@@ -1,9 +1,9 @@
 'use client';
 
-import { PRODUCT_LS_KEY } from "../helpers/_keys";
+import { PRODUCT_LS_KEY } from "./_keys";
 
 
-export function useGetProductCategoryFromLS(
+export function getProductCategoryFromLS(
   categoryName: string
 ) {
   const products = localStorage.getItem(PRODUCT_LS_KEY)
@@ -19,3 +19,4 @@ export function useGetProductCategoryFromLS(
     throw new Error('Products not found in local storage')
   }
 }
+
