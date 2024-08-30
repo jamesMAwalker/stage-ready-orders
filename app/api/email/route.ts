@@ -1,7 +1,8 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server';
 
-import { InvoiceEmail } from '@/email';
+import { InvoiceEmail } from '@/email/invoice';
+import OwnerEmail from '@/email/owner';
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -11,6 +12,7 @@ export async function POST(request: Request) {
     subject,
     customerName,
     customerAddress,
+    shopifyOrderId,
     orderId,
     orderDate,
     lineItems 
@@ -27,6 +29,18 @@ export async function POST(request: Request) {
         orderId,
         orderDate,
         lineItems
+      })
+    })
+
+    await resend.emails.send({
+      from: 'stageready.orders@stageready.standingocosmetics.com',
+      to: 'standingocosmetics@gmail.com',
+      subject,
+      react: OwnerEmail({
+        customerName,
+        orderId: shopifyOrderId,
+        orderDate,
+        lineItems,
       })
     })
  

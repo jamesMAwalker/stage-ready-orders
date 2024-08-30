@@ -62,6 +62,7 @@ export function CartMenu() {
 
       // Extract order data for email template
       const {
+        id: shopifyOrderId,
         name: orderId,
         email,
         customer: shopifyCustomer,
@@ -95,6 +96,7 @@ export function CartMenu() {
           subject: `Order ${orderId} Confirmation`,
           customerName: `${shopifyCustomer.first_name} ${shopifyCustomer.last_name}`,
           customerAddress: billing_address,
+          shopifyOrderId,
           orderId,
           orderDate: created_at,
           lineItems: itemsWithImages
@@ -116,7 +118,9 @@ export function CartMenu() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant='default'>Review Order</Button>
+        <Button variant='default' disabled={!cartContent?.length}>
+          {!!cartContent?.length ? 'Review Order' : 'Cart Empty'}
+        </Button>
       </SheetTrigger>
       <SheetContent className='flex-col-tl gap-md'>
         <SheetHeader>
