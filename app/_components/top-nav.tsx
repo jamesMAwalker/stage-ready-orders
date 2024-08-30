@@ -1,9 +1,7 @@
-
 import Link from 'next/link'
-import {
-  SignedIn,
-  UserButton
-} from '@clerk/nextjs'
+import { SignedIn } from '@clerk/nextjs'
+
+import { UserButton } from './user-button'
 
 export const TopNav = () => {
   return (
@@ -12,12 +10,11 @@ export const TopNav = () => {
         <img
           src='/images/soc-logo__white-text.png'
           alt='logo'
-          className='w-[8vw] h-auto'
+          className='w-[8vw] h-auto mt-[-1vh]'
         />
       </Link>
       <SignedIn>
-        {/* @ts-ignore */}
-        <UserButton className='px-md py-xs font-bold text-black bg-white rounded-md' />
+        <UserButton />
       </SignedIn>
     </nav>
   )
