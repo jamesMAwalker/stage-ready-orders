@@ -30,7 +30,7 @@ export const InvoiceEmail = ({
   customerAddress,
   orderId,
   orderDate,
-  lineItems 
+  lineItems
 }: IOrderEmailProps) => (
   <Html>
     <Head />
@@ -46,7 +46,6 @@ export const InvoiceEmail = ({
             <Img
               src={`https://cdn.shopify.com/s/files/1/0590/7300/3681/files/StandingOCosmetics_Final_WhiteOnBlack.png?v=1629420769`}
               width='200'
-              // height='80'
               alt='Standing O Cosmetics logo'
               style={{ margin: 'auto' }}
             />
@@ -55,7 +54,7 @@ export const InvoiceEmail = ({
         <Hr style={global.hr} />
         <Section style={message}>
           <Heading style={global.heading}>
-            Your Order is Confirmed!
+            Your Order Is Confirmed!
           </Heading>
           <Text style={global.text}>
             Your order has been successfully submitted to
@@ -63,9 +62,9 @@ export const InvoiceEmail = ({
           </Text>
           <Text style={{ ...global.text, marginTop: 24 }}>
             We will review your order and apply discounts based
-            on your account status. Typical processing time is
-            2-5 business days. We will send you an email with the
-            tracking number once your order is confirmed.
+            on our wholesale pricing tier. Typical processing
+            time is 2-5 business days. We will send you an email
+            with the final invoice.
           </Text>
         </Section>
         <Hr style={global.hr} />
