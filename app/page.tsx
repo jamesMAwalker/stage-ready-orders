@@ -11,15 +11,16 @@ import { Loader } from '@/components/loader'
 export default function Home() {
   const { isSignedIn, isLoaded } = useUser()
 
-  if (!isLoaded) {
-    return <Loader />
-  }
-
+  
   useEffect(() => {
     if (isSignedIn) {
       redirect('/orders')
     }
   }, [isSignedIn])
+
+  if (!isLoaded) {
+    return <Loader />
+  }
 
   return (
     <>
