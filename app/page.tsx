@@ -1,21 +1,25 @@
-'use client';
+'use client'
 
+import { useEffect } from 'react'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
+import Link from 'next/link'
 
-import { Button } from '@/shadcn/ui/button';
+import { Button } from '@/shadcn/ui/button'
+import { Loader } from '@/components/loader'
 
 export default function Home() {
   const { isSignedIn, isLoaded } = useUser()
 
   if (!isLoaded) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
-  if (isSignedIn) {
-    redirect('/orders')
-  }
+  useEffect(() => {
+    if (isSignedIn) {
+      redirect('/orders')
+    }
+  }, [isSignedIn])
 
   return (
     <>
