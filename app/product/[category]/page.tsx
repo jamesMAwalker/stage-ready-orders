@@ -35,7 +35,7 @@ const ProductCategoryPage = ({
           {productCategory?.title} Collection
         </h1>
         <Link
-          href={'/product'}
+          href={'/orders'}
           className='text-sm text-muted-foreground hover:text-brand'
         >
           Back to product categories &nbsp; →
