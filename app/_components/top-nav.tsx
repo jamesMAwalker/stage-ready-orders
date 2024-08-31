@@ -10,7 +10,7 @@ export const TopNav = () => {
         <img
           src='/images/soc-logo__white-text.png'
           alt='logo'
-          className='w-[8vw] h-auto mt-[-1vh]'
+          className='w-[120px] lg:w-[8vw] h-auto mt-[-1vh]'
         />
       </Link>
       <SignedIn>

@@ -30,7 +30,7 @@ const ProductCategoryPage = ({
 
   return (
     <div className='pt-xl full flex-col-tl gap-md'>
-      <div className='PAGE_HEADER flex justify-between items-center w-full gap-md'>
+      <div className='PAGE_HEADER flex flex-col-reverse items-start justify-start lg:flex-row lg:justify-between lg:items-center w-full gap-md'>
         <h1 className='text-4xl font-bold'>
           {productCategory?.title} Collection
         </h1>
