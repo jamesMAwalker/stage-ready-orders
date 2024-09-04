@@ -125,5 +125,15 @@ declare interface IError {
   title: string 
   message: string 
   link?: string 
-  status?: number 
+  status?: number
+  buttonText?: string
+}
+
+declare interface ILoginStatus {
+  code: string 
+  title: string 
+  message: string 
+  link?: string 
+  status?: number
+  buttonText?: string
 }

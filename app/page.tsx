@@ -1,48 +1,57 @@
+// @ts-nocheck
+
 'use client'
 
-import { useEffect } from 'react'
-import { redirect } from 'next/navigation'
-import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { redirect } from 'next/navigation'
+import { AnimatePresence, motion } from 'framer-motion'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { set, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { LoaderIcon } from 'lucide-react'
+import { useUser } from '@clerk/clerk-react'
 
+import { cn } from '@/shadcn/utils'
 import { Button } from '@/shadcn/ui/button'
 import { Loader } from '@/components/loader'
+import { Input } from '@/shadcn/ui/input'
+import { Separator } from '@/shadcn/ui/separator'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@/shadcn/ui/form'
+
+import { animate } from '@/animation'
+import { WelcomeHeader } from './_components/welcome-header'
 
 export default function Home() {
-  const { isSignedIn, isLoaded } = useUser()
+  const { isSignedIn } = useUser()
 
-  
-  useEffect(() => {
-    if (isSignedIn) {
-      redirect('/orders')
-    }
-  }, [isSignedIn])
-
-  if (!isLoaded) {
-    return <Loader />
+  if (isSignedIn) {
+    redirect('/orders')
   }
 
   return (
     <>
-      <div className='SIGNIN_WRAP  w-full h-[80vh] flex-col-c gap-lg'>
-        <h1 className='flex-col-c gap-md'>
-          <span>
-            <img
-              src='/images/soc-logo.png'
-              alt='logo'
-              className=' h-auto'
-            />
-          </span>
-          <span className='text-4xl font-bold'>
-            Welcome to Standing O Cosmetics
-          </span>
-          <span className='text-2xl uppercase'>
-            Stage Ready Program Ordering
-          </span>
-          <Link href='/sign-up'>
-            <Button>Get Started</Button>
-          </Link>
-        </h1>
+      <div className='HOME_PAGE_WRAP  w-full h-[80vh] flex-col-c gap-md'>
+        <WelcomeHeader />
+        <p className='text-center w-full lg:w-1/2'>
+          Welcome to Stage Ready Orders! You can use this site to
+          place orders for your team or studio. Click the button
+          below to get started.
+        </p>
+        <Link href={'/sign-up'} className='w-full'>
+          <Button className='w-full'>Get Started</Button>
+        </Link>
+        <Link href={'/sign-in'} className='w-full'>
+          <Button className='w-full border bg-transparent border-brand text-brand' variant='outline'>Sign In</Button>
+        </Link>
       </div>
     </>
   )

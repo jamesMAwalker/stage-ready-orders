@@ -8,13 +8,7 @@ import {
   useMemo,
   useState
 } from 'react'
-import { redirect } from 'next/navigation'
 import { useUser } from '@clerk/clerk-react'
-import { useClerk } from '@clerk/nextjs'
-
-import { useToast } from '@/shadcn/ui/use-toast'
-import { useErrorContext } from './errors.context'
-import { ELoginErrors } from '@/enums'
 
 const CustomerState = createContext<{
   customer: any | null
@@ -36,13 +30,9 @@ export function CustomerProvider({
 }: {
   children: ReactNode
 }) {
-  const { toast } = useToast()
-  const { signOut } = useClerk()
-  const { setError } = useErrorContext()
-
   const { isSignedIn, user, isLoaded } = useUser()
   const [customer, setCustomer] = useState<any | null>(null)
-
+  
   useEffect(() => {
     if (isSignedIn && isLoaded) {
       const email =
@@ -52,7 +42,6 @@ export function CustomerProvider({
       {
         ;(async () => {
           try {
-            // attempt to get customer from Shopify
             const res = await fetch('/api/customers', {
               method: 'POST',
               headers: {
@@ -63,24 +52,6 @@ export function CustomerProvider({
               })
             })
             const data = await res.json()
-
-            // handle login errors
-            if (!data.shopify_customer) {
-              const errorData = ELoginErrors[data.code as string]
-              setError(errorData)
-
-              toast({
-                variant: 'destructive',
-                title: errorData.title,
-                description: errorData.message
-              })
-
-              setTimeout(() => {
-                redirect('/sign-in')
-              }, 5000)
-
-              return;
-            }
 
             setCustomer(data.shopify_customer)
           } catch (error: any) {

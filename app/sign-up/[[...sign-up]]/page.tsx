@@ -1,42 +1,43 @@
-import React from 'react'
-import { SignUp } from '@clerk/nextjs'
+'use client'
 
-const SignUpPage = () => {
+import Link from 'next/link'
+import * as SU from '@clerk/elements/sign-up'
+
+import { WelcomeHeader } from '@/components/welcome-header'
+import { SignUpForm } from '@/components/sign-up-form'
+import { SignUpClerkStartStep } from '@/components/sign-up-clerk-start'
+import { SignUpClerkVerificationStep } from '@/components/sign-up-clerk-verification'
+
+export default function SignUpPage() {
   return (
-    <>
-      <div className='SIGNIN_WRAP  w-full h-[80vh] flex-col-c gap-md lg:gap-lg'>
-        <div className='flex-col-c gap-md'>
-          <h1 className='flex-col-c gap-md'>
-            <div className='w-full flex flex-col lg:flex-row items-center justify-center mb-md gap-md '>
-              <span className='flex-c h-[4vh] lg:h-[40px]'>
-                <img
-                  src='/images/soc-logo.png'
-                  alt='logo'
-                  className='scale-110'
-                />
-              </span>
-              <span className='w-[25vw] mt-sm h-[.5px] lg:h-full lg:w-[.5px] bg-neutral-400'></span>
-              <span className='flex-c w-1/2 lg:w-[175px] h-auto'>
-                <img
-                  src='/images/shopify-logo.png'
-                  alt='logo'
-                  className='h-auto w-auto h-[5vh]'
-                />
-              </span>
-            </div>
-            <span className='text-4xl text-center'>
-              Stage Ready Program Ordering
+    <SU.Root>
+      <div className='SIGN_UP_WRAP  w-full h-[80vh] flex-col-c gap-md'>
+        <WelcomeHeader />
+        <div className='SIGN_UP_CONTAINER w-full lg:w-1/2 flex-col-c gap-md'>
+          <p className='flex-col-c gap-sm text-center'>
+            <span>
+              Enter your Shopify account email below. If your
+              account is eligible, you can continue to sign up.
+              Otherwise follow the instructions that appear below
+              to get an eligible account.
             </span>
-          </h1>
-          <p className='text-center'>
-            Use the email associated with your Shopify account to
-            sign up.
           </p>
+
+          <SignUpForm />
+          <SignUpClerkStartStep />
+          <SignUpClerkVerificationStep type={'SIGN_UP'} />
+
+          <div className='flex-c gap-[.5ch] text-muted-foreground'>
+            <span>Already have an account?</span>
+            <Link
+              href={'/sign-in'}
+              className='text-sm hover:underline text-brand'
+            >
+              Sign in.
+            </Link>
+          </div>
         </div>
-        <SignUp />
       </div>
-    </>
+    </SU.Root>
   )
 }
-
-export default SignUpPage

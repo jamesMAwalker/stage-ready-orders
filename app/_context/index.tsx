@@ -11,6 +11,7 @@ import { CartProvider } from './cart.context'
 import { CustomerProvider } from './customer.context'
 import { ErrorProvider } from './errors.context'
 import { ProductProvider } from './product.context'
+import { ShopifyStatusProvider } from './shopify-status.context'
 
 export const Providers = ({
   children
@@ -20,13 +21,15 @@ export const Providers = ({
   return (
     <QueryClientProvider client={new QueryClient()}>
       <ClerkProvider>
-        <ErrorProvider>
-          <CustomerProvider>
-            <CartProvider>
-              <ProductProvider>{children}</ProductProvider>
-            </CartProvider>
-          </CustomerProvider>
-        </ErrorProvider>
+        <ShopifyStatusProvider>
+          <ErrorProvider>
+            <CustomerProvider>
+              <CartProvider>
+                <ProductProvider>{children}</ProductProvider>
+              </CartProvider>
+            </CustomerProvider>
+          </ErrorProvider>
+        </ShopifyStatusProvider>
       </ClerkProvider>
     </QueryClientProvider>
   )
