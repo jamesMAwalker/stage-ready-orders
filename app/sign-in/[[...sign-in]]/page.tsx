@@ -27,7 +27,7 @@ const SignInPage = () => {
         <SignInForm />
         <SignInClerkVerificationStep />
         <div className='flex-c gap-[.5ch] text-muted-foreground'>
-          <span>Don't have an account?</span>
+          <span>Don&apos;t have an account?</span>
           <Link
             href={'/sign-up'}
             className='text-sm hover:underline text-brand'
