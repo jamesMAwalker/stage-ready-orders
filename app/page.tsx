@@ -39,9 +39,9 @@ export default function Home() {
 
   return (
     <>
-      <div className='HOME_PAGE_WRAP  w-full h-[80vh] flex-col-c gap-md'>
+      <div className='HOME_PAGE_WRAP  w-full lg:w-1/2 h-[80vh] flex-col-c gap-md'> 
         <WelcomeHeader />
-        <p className='text-center w-full lg:w-1/2'>
+        <p className='text-center w-full'>
           Welcome to Stage Ready Orders! You can use this site to
           place orders for your team or studio. Click the button
           below to get started.
