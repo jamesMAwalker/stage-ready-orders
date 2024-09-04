@@ -15,7 +15,6 @@ export async function POST(req: Request) {
     })
 
     const isExistingUser = res.data.length > 0
-    console.log("🚀 ~ POST ~ isExistingUser:", isExistingUser)
 
     if (isExistingUser) {
       return NextResponse.json({
@@ -30,7 +29,6 @@ export async function POST(req: Request) {
     }
 
   } catch (error) {
-    console.log("🚀 ~ POST ~ error:", error)
     return NextResponse.json({
       status: 500,
       message: 'Server error!'

@@ -7,7 +7,6 @@ const password = process.env.SHOPIFY_ADMIN_API_PASSWORD as string
 
 export async function POST(req: Request) {
   const { email } = await req.json()
-  console.log("🚀 ~ POST ~ email:", email)
 
   try {
     const res = await fetch(`https://${storeUrl}/admin/api/2024-07/customers/search.json?query=email:${email}`, {

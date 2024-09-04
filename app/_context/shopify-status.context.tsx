@@ -110,7 +110,6 @@ export function ShopifyStatusProvider({
           {
             ;(async () => {
               const status = await checkAccountStatus({ email }) // Call function when typing has stopped and email is valid
-              console.log('🚀 ~ ; ~ status:', status)
               setEligibilityStatus(status.message)
               setCheckingAccountStatus(false)
             })()

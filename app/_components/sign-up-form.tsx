@@ -30,7 +30,6 @@ export const SignUpForm = () => {
         className='BUTTON_WRAP w-full flex-col-c justify-between h-min '
         onSubmit={(e) => {
           e.preventDefault()
-          console.log('prevented default!')
         }}
       >
         <FormField
