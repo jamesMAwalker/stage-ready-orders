@@ -3,7 +3,6 @@ import { createClerkClient } from '@clerk/backend';
 import { ELoginStatus } from '@/enums';
 
 const secretKey = process.env.CLERK_SECRET_KEY
-console.log("🚀 ~ secretKey:", secretKey)
 
 export async function POST(req: Request) {
   const { email } = await req.json()
