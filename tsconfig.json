@@ -20,7 +20,12 @@
     "paths": {
       "@/*": ["./*"],
       "@/components/*": ["./app/_components/*"],
-      "@/helpers/*": ["./helpers/*"]
+      "@/helpers/*": ["./helpers/*"],
+      "@/hooks/*": ["./app/_hooks/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/enums/*": ["./enums/*"],
+      "@/context/*": ["./app/_context/*"],
+      "@/animation": ["./app/_animation/"]
     }
   },
   "include": [
