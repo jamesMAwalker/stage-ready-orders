@@ -25,6 +25,8 @@ const ShopifyStatusState = createContext<{
   setCheckingAccountStatus: Dispatch<SetStateAction<boolean>>
   form: any
   checkAccountStatus: (values: any) => any
+  clerkError: string | null
+  setClerkError: Dispatch<SetStateAction<string | null>>
 } | null>(null)
 
 const formSchema = z.object({
@@ -54,6 +56,9 @@ export function ShopifyStatusProvider({
     useState<ILoginStatus | null>(null)
   const [checkingAccountStatus, setCheckingAccountStatus] =
     useState<boolean>(false)
+  const [clerkError, setClerkError] = useState<string | null>(
+    null
+  )
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,10 +79,25 @@ export function ShopifyStatusProvider({
         email
       })
     })
-
     const data = await res.json()
 
-    return data
+    // check clerk BE for existing account
+    const clerkRes = await fetch('/api/clerk-be', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email
+      })
+    })
+    const clerkStatus = await clerkRes.json()
+
+    if (clerkStatus.status === 409) {
+      return clerkStatus
+    } else {
+      return data
+    }
   }
 
   useEffect(() => {
@@ -111,10 +131,13 @@ export function ShopifyStatusProvider({
       checkingAccountStatus,
       setCheckingAccountStatus,
       form,
-      checkAccountStatus
+      checkAccountStatus,
+      clerkError,
+      setClerkError
     }),
     [
       email,
+      clerkError,
       eligibilityStatus,
       checkingAccountStatus,
       checkAccountStatus

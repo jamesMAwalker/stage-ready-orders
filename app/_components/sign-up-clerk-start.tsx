@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'next/link'
 import * as CC from '@clerk/elements/common'
 import * as SU from '@clerk/elements/sign-up'
 
@@ -8,17 +9,18 @@ import { useShopifyStatusContext } from '@/context/shopify-status.context'
 import { Button } from '@/shadcn/ui/button'
 
 export function SignUpClerkStartStep() {
-  const { email, eligibilityStatus, setEligibilityStatus } =
-    useShopifyStatusContext()
+  const { email, eligibilityStatus } = useShopifyStatusContext()
 
   return (
     <SU.Step name='start' className='CLERK_START_STEP w-full'>
-      <CC.Field
-        name='emailAddress'
-        className='CLERK_HIDDEN_FIELD hidden'
-      >
-        <CC.Label>Email</CC.Label>
-        <CC.Input type='email' value={email || ''} />
+      <CC.Field name='emailAddress'>
+        <CC.FieldError className='hidden' />
+        <CC.Label className='hidden'>Email</CC.Label>
+        <CC.Input
+          className='hidden'
+          type='email'
+          value={email || ''}
+        />
       </CC.Field>
       <AnimatePresence>
         {eligibilityStatus?.code === 'VALID_LOGIN' && (
@@ -35,17 +37,30 @@ export function SignUpClerkStartStep() {
           </motion.div>
         )}
         {eligibilityStatus?.code ===
-          'NOT_A_SHOPIFY_CUSTOMER' && (
-          <motion.div
-            {...animate()}
-            className='ANIMATION_WRAP w-full'
-          >
-            <Button type='submit' className='w-full'>
-              <a href={eligibilityStatus.link}>
+          'EXISTING_CLERK_ACCOUNT' && (
+          <Link href={eligibilityStatus.link!}>
+            <motion.div
+              {...animate()}
+              className='ANIMATION_WRAP w-full'
+            >
+              <Button className='w-full'>
                 {eligibilityStatus.buttonText}
-              </a>
-            </Button>
-          </motion.div>
+              </Button>
+            </motion.div>
+          </Link>
+        )}
+        {eligibilityStatus?.code ===
+          'NOT_A_SHOPIFY_CUSTOMER' && (
+          <a href={eligibilityStatus.link}>
+            <motion.div
+              {...animate()}
+              className='ANIMATION_WRAP w-full'
+            >
+              <Button type='submit' className='w-full'>
+                {eligibilityStatus.buttonText}
+              </Button>
+            </motion.div>
+          </a>
         )}
         {eligibilityStatus?.code ===
           'NOT_A_STAGE_READY_CUSTOMER' && (
@@ -53,11 +68,11 @@ export function SignUpClerkStartStep() {
             {...animate()}
             className='ANIMATION_WRAP w-full'
           >
-            <Button type='submit' className='w-full'>
-              <a href={eligibilityStatus.link}>
+            <a href={eligibilityStatus.link}>
+              <Button type='submit' className='w-full'>
                 {eligibilityStatus.buttonText}
-              </a>
-            </Button>
+              </Button>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

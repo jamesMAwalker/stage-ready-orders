@@ -31,6 +31,13 @@ export const ELoginStatus: Record<string, ILoginStatus> = {
     link: "",
     buttonText: "Sign Up"
   },
+  EXISTING_CLERK_ACCOUNT: {
+    code: "EXISTING_CLERK_ACCOUNT",
+    title: "This email already has an account.",
+    message: "This email already has an account. Please sign in to continue.",
+    link: `/sign-in`,
+    buttonText: "Sign In"
+  },
   NOT_A_SHOPIFY_CUSTOMER: {
     code: "NOT_A_SHOPIFY_CUSTOMER",
     title: "Not a Shopify Customer",
