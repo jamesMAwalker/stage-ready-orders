@@ -11,7 +11,7 @@ export const LinkButton = ({
 }) => {
   function handleClick(e: any) {
     e.preventDefault()
-    window.location.href = href
+    window.open(href, '_blank')
   }
 
   return (

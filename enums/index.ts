@@ -42,14 +42,14 @@ export const ELoginStatus: Record<string, ILoginStatus> = {
     code: "NOT_A_SHOPIFY_CUSTOMER",
     title: "Not a Shopify Customer",
     message: "Your email is not associated with a Shopify account. Please try a different email or sign up at Shopify with this email.",
-    link: "https://accounts.shopify.com/signup?rid=50883a7c-de52-4436-9565-e2cd14987c79",
+    link: "https://shopify.com/59073003681/identity/lookup?destination_uuid=48778b34-118c-483e-93e5-1359d683f620&redirect_uri=https%3A%2F%2Fshopify.com%2F59073003681%2Faccount%2Fcallback&rid=a7156ac7-7c97-46a7-8462-d0418fbb493b&ui_locales=en&verify=1725505102-0bTqiOLrNAeP2Viv%2FiCoB8s5lbHUSHGHsEpDCFlqGMY%3D",
     buttonText: "Create a Shopify Account"
   },
   NOT_A_STAGE_READY_CUSTOMER: {
     code: "NOT_A_STAGE_READY_CUSTOMER",
     title: "Not a Stage Ready Customer",
     message: "Your account has not been approved for the Stage Ready Program. Visit the link below to apply for access.",
-    link: "https://accounts.shopify.com/signup?rid=50883a7c-de52-4436-9565-e2cd14987c79",
+    link: "https://api.collabs.shopify.com/creator/signup/community_application/D6APXfVLVP4?origin=THEME_EXTENSION",
     buttonText: "Stage Ready Application"
   },
 };
