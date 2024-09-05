@@ -1,6 +1,16 @@
-import { ProductCategoryList } from '@/components/product-category-list'
+'use client';
 
-export default async function OrderPage() {
+import { ProductCategoryList } from '@/components/product-category-list'
+import { useUser } from '@clerk/clerk-react'
+import { redirect } from 'next/navigation'
+
+export default function OrderPage() {
+  const { isSignedIn } = useUser()
+
+  if (!isSignedIn) {
+    redirect('/sign-in')
+  }
+
   return (
     <>
       <h1 className='flex-col-c text-2xl mt-lg text-center'>

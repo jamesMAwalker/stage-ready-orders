@@ -7,6 +7,7 @@ import { animate } from '@/animation'
 import { useShopifyStatusContext } from '@/context/shopify-status.context'
 
 import { Button } from '@/shadcn/ui/button'
+import { LinkButton } from './link-button'
 
 export function SignUpClerkStartStep() {
   const { email, eligibilityStatus } = useShopifyStatusContext()
@@ -51,29 +52,17 @@ export function SignUpClerkStartStep() {
         )}
         {eligibilityStatus?.code ===
           'NOT_A_SHOPIFY_CUSTOMER' && (
-          <a href={eligibilityStatus.link}>
-            <motion.div
-              {...animate()}
-              className='ANIMATION_WRAP w-full'
-            >
-              <Button type='submit' className='w-full'>
-                {eligibilityStatus.buttonText}
-              </Button>
-            </motion.div>
-          </a>
+          <LinkButton
+            href={eligibilityStatus.link?.toString()!}
+            text={eligibilityStatus.buttonText?.toString()!}
+          />
         )}
         {eligibilityStatus?.code ===
           'NOT_A_STAGE_READY_CUSTOMER' && (
-          <motion.div
-            {...animate()}
-            className='ANIMATION_WRAP w-full'
-          >
-            <a href={eligibilityStatus.link}>
-              <Button type='submit' className='w-full'>
-                {eligibilityStatus.buttonText}
-              </Button>
-            </a>
-          </motion.div>
+          <LinkButton 
+            href={eligibilityStatus.link?.toString()!}
+            text={eligibilityStatus.buttonText?.toString()!}
+          />
         )}
       </AnimatePresence>
     </SU.Step>
