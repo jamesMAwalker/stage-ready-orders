@@ -18,7 +18,7 @@ export const LinkButton = ({
     <motion.button
       {...animate()}
       onClick={handleClick}
-      className='text-sm text-center w-full bg-brand rounded-md py-sm text-white hover:text-brand'
+      className='text-sm text-center w-full bg-brand rounded-md py-sm text-white'
     >
       {text}
     </motion.button>

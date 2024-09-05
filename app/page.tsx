@@ -50,7 +50,7 @@ export default function Home() {
           <Button className='w-full'>Get Started</Button>
         </Link>
         <Link href={'/sign-in'} className='w-full'>
-          <Button className='w-full border bg-transparent border-brand text-brand' variant='outline'>Sign In</Button>
+          <Button className='w-full border bg-transparent border-brand hover:text-white hover:bg-brand text-brand' variant='outline'>Sign In</Button>
         </Link>
       </div>
     </>
