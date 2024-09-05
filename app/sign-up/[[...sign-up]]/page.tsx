@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { useUser } from '@clerk/clerk-react'
 import * as SU from '@clerk/elements/sign-up'
 
 import { WelcomeHeader } from '@/components/welcome-header'
@@ -9,6 +11,12 @@ import { SignUpClerkStartStep } from '@/components/sign-up-clerk-start'
 import { SignUpClerkVerificationStep } from '@/components/sign-up-clerk-verification'
 
 export default function SignUpPage() {
+  const { isSignedIn } = useUser()
+
+  if (isSignedIn) {
+    redirect('/orders')
+  }
+
   return (
     <SU.Root>
       <div className='SIGN_UP_WRAP  w-full h-[80vh] flex-col-c gap-md'>

@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { useUser } from '@clerk/clerk-react'
 import * as SI from '@clerk/elements/sign-in'
 
 import { Separator } from '@/shadcn/ui/separator'
@@ -9,6 +11,12 @@ import { SignInForm } from '@/components/sign-in-form'
 import { SignInClerkVerificationStep } from '@/components/sign-in-clerk-verification'
 
 const SignInPage = () => {
+  const { isSignedIn } = useUser()
+
+  if (isSignedIn) {
+    redirect('/orders')
+  }
+
   return (
     <SI.Root>
       <div className='SIGNIN_WRAP  w-full h-[80vh] flex-col-c gap-md lg:gap-lg'>
