@@ -11,7 +11,6 @@ export const WelcomeHeader = () => {
             className='scale-110'
           />
         </span>
-        {/* <span className='w-[25vw] mt-sm h-[.5px] lg:h-full lg:w-[.5px] bg-brand/30'></span> */}
         <span className='flex-c w-1/2 lg:w-[175px] h-auto'>
           <img
             src='/images/shopify-logo.png'
@@ -20,9 +19,10 @@ export const WelcomeHeader = () => {
           />
         </span>
       </div>
-      <h1 className='HEADER_CONTAINER flex-col-c gap-md text-center'>
+      <h1 className='HEADER_CONTAINER flex-col-c my-md uppercase gap-md text-center'>
+        <span className='text-xl lg:text-2xl'>Welcome To</span>
         <span className='text-3xl lg:text-4xl font-bold'>
-          Welcome to <br /> Stage Ready Orders
+          Stage Ready Orders
         </span>
         <span className='uppercase'>
           By Standing O Cosmetics
