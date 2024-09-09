@@ -1,4 +1,4 @@
-const stageReadyTags = ['STUDIOSTAGEREADY', 'TEAMSTAGEREADY', 'STUDIOOWNER', 'STUDIO OWNER']
+const stageReadyTags = ['STAGEREADY', 'STUDIOSTAGEREADY', 'TEAMSTAGEREADY', 'STUDIOOWNER', 'STUDIO OWNER']
 
 export function checkStageReady(customer: IShopifyCustomer) {
   const isStageReady = stageReadyTags.some(tag => {
