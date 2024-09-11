@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     if (!shopify_customer) {
       return NextResponse.json({
         status: 500,
-        message: ELoginStatus.NOT_A_SHOPIFY_CUSTOMER
+        message: ELoginStatus.NOT_A_STAGE_READY_CUSTOMER
       })
     } else if (!isStageReady) {
       return NextResponse.json({

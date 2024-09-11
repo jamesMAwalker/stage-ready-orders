@@ -135,11 +135,11 @@ export function ShopifyStatusProvider({
       setClerkError
     }),
     [
+      form,
       email,
       clerkError,
       eligibilityStatus,
       checkingAccountStatus,
-      checkAccountStatus
     ]
   )
 

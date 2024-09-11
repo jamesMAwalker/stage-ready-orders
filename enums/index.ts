@@ -17,7 +17,7 @@ export const ELoginErrors: Record<string, IError> = {
   NOT_A_STAGE_READY_CUSTOMER: {
     code: "NOT_A_STAGE_READY_CUSTOMER",
     title: "Not a Stage Ready Customer",
-    message: "Your account has not been approved for the Stage Ready Program. Visit the link below to apply for access.",
+    message: "Your account has not been approved for the Stage Ready Program.",
     link: "https://standingocosmetics.com/pages/stage-ready-teams",
     buttonText: "Stage Ready Application"
   },
@@ -34,7 +34,7 @@ export const ELoginStatus: Record<string, ILoginStatus> = {
   EXISTING_CLERK_ACCOUNT: {
     code: "EXISTING_CLERK_ACCOUNT",
     title: "This email already has an account.",
-    message: "This email already has an account. Please sign in to continue.",
+    message: "This email already has an account. Please sign in.",
     link: `/sign-in`,
     buttonText: "Sign In"
   },
@@ -48,7 +48,7 @@ export const ELoginStatus: Record<string, ILoginStatus> = {
   NOT_A_STAGE_READY_CUSTOMER: {
     code: "NOT_A_STAGE_READY_CUSTOMER",
     title: "Not a Stage Ready Customer",
-    message: "Your account has not been approved for the Stage Ready Program. Visit the link below to apply for access.",
+    message: "Email Not Stage Ready Approved.",
     link: "https://api.collabs.shopify.com/creator/signup/community_application/D6APXfVLVP4?origin=THEME_EXTENSION",
     buttonText: "Stage Ready Application"
   },

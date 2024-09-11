@@ -19,16 +19,14 @@ const SignInPage = () => {
 
   return (
     <SI.Root>
-      <div className='SIGNIN_WRAP  w-full h-[80vh] flex-col-c gap-md lg:gap-lg'>
+      <div className='SIGNIN_WRAP  w-full h-[80vh] flex-col-c gap-md'>
         <div className='WELCOME_CONTAINER flex-col-c gap-md'>
           <WelcomeHeader />
-          <div className='SIGN_UP_CONTAINER w-full lg:w-1/2 flex-col-c gap-md'>
-            <p className='flex-col-c gap-sm text-center'>
-              <span>
-                Enter your Shopify account email to sign in. You
-                will recieve an email with a link to continue to
-                the orders page.
-              </span>
+          <div className='SIGN_UP_CONTAINER w-full  flex-col-c gap-md'>
+            <p className='w-full text-center'>
+              Enter your <strong>Stage Ready approved</strong>{' '}
+              email to sign in. <br /> You will recieve an email
+              with a verification link to continue to the orders page.
             </p>
           </div>
         </div>
