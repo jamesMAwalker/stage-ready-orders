@@ -22,6 +22,8 @@ const config = {
     extend: {
       colors: {
         brand: "rgba(var(--color-brand-primary) / <alpha-value>)",
+        brand_secondary: "rgba(var(--color-brand-secondary) / <alpha-value>)",
+        brand_tertiary: "rgba(var(--color-brand-tertiary) / <alpha-value>)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -59,7 +59,8 @@ export function SignUpClerkStartStepALT() {
         disabled={eligibilityStatus?.code !== 'VALID_LOGIN'}
         className='w-full bg-brand rounded-md text-white font-semibold p-sm disabled:opacity-80 disabled:cursor-not-allowed'
       >
-        Sign Up
+        Create Your Orders Account →
+        {/* Sign Up */}
       </SU.Action>
     </SU.Step>
   )
