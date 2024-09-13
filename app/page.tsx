@@ -8,7 +8,6 @@ import { WelcomeHeader } from '@/components/welcome-header'
 import { LinkButton } from '@/components/link-button'
 import { Button } from '@/shadcn/ui/button'
 
-
 export default function HomePage() {
   const { isSignedIn } = useUser()
 
@@ -40,7 +39,7 @@ export default function HomePage() {
           </span>
           <span className=''>
             If you have not already been approved for the Stage
-            Ready program, visit the link below to apply for
+            Ready Program, visit the link below to apply for
             access.
           </span>
           <LinkButton
@@ -58,13 +57,13 @@ export default function HomePage() {
               Program
             </strong>
             , return to this site and use the email you used to
-            sign up for The Stage Ready Program {' '}
-            <>to create your ordering enabled account.</>
+            sign up for The Stage Ready Program to create your
+            ordering enabled account.
           </p>
           <div className='BUTTONS_CONTAINER flex-col-c gap-sm w-full'>
             <Link href={'/sign-up'} className='w-full'>
               <Button className='bg-transparent border border-brand text-brand hover:bg-brand/10 w-full'>
-                Create Your Ordering Account → 
+                Create Your Ordering Account →
               </Button>
             </Link>
           </div>
