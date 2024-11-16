@@ -1,21 +1,27 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { useUser } from '@clerk/clerk-react'
 import * as SI from '@clerk/elements/sign-in'
 
+import { SignInForm } from '@/components/sign-in-form'
 import { Separator } from '@/shadcn/ui/separator'
 import { WelcomeHeader } from '@/components/welcome-header'
-import { SignInForm } from '@/components/sign-in-form'
 import { SignInClerkVerificationStep } from '@/components/sign-in-clerk-verification'
 
 const SignInPage = () => {
   const { isSignedIn } = useUser()
-
-  if (isSignedIn) {
-    redirect('/orders')
-  }
+  const router = useRouter()
+  // if (isSignedIn) {
+    //   redirect('/orders')
+    // }
+   useEffect(() => {
+     if (isSignedIn) {
+       router.push('/orders') // Use router.push for navigation inside an effect
+     }
+   }, [isSignedIn, router])
 
   return (
     <SI.Root>

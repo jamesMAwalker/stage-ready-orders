@@ -45,22 +45,27 @@ export function ErrorProvider({
     const errorLS = localStorage.getItem(ERROR_LS_KEY)
     const errorData = errorLS ? JSON.parse(errorLS) : null
     
-    if (errorData) {
-      setError(errorData)
+    setError(() => {
+      if (errorData) {
+        return errorData
+      }
       setTimeout(() => {
         localStorage.removeItem(ERROR_LS_KEY)
       }, errorTimeOut)
-    }
+      
+      return null;
+    })
   }, [])
 
-  const value = useMemo(
-    () => ({
-      error,
-      setError,
-      setErrorLS
-    }),
-    [error]
-  )
+  const value={error, setError, setErrorLS}
+  // const value = useMemo(
+  //   () => ({
+  //     error,
+  //     setError,
+  //     setErrorLS
+  //   }),
+  //   [error]
+  // )
 
   return (
     <ErrorState.Provider value={value}>

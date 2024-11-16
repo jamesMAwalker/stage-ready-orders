@@ -5,7 +5,7 @@ import * as CC from '@clerk/elements/common'
 import { useShopifyStatusContext } from '@/context/shopify-status.context'
 import { animate } from '@/animation'
 import { LoaderIcon } from 'lucide-react'
-
+import { Component, ReactNode } from 'react'
 
 export const SignInForm = () => {
     const {

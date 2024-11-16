@@ -6,13 +6,23 @@ import { ProductList } from '@/app/_components/product-list'
 import { getProductCategoryFromLS } from '@/app/_context/helpers/get-product-category-LS'
 import { useProductContext } from '@/app/_context/product.context'
 import Link from 'next/link'
+import { useShopifyStatusContext } from '@/app/_context/shopify-status.context'
+import { useCustomerContext } from '@/app/_context/customer.context'
+import { useCartContext } from '@/app/_context/cart.context'
+import { useErrorContext } from '@/app/_context/errors.context'
+import LoadingPage from '@/app/loading'
 
 const ProductCategoryPage = ({
   params
 }: {
   params: { category: string }
 }) => {
+  const { form, email, clerkError } = useShopifyStatusContext()
+  const { customer } = useCustomerContext()
+  const { cartContent } = useCartContext()
+  const { error } = useErrorContext()
   const { product } = useProductContext()
+
   const [productCategory, setProductCategory] =
     useState<IProductCategory | null>(null)
 
@@ -27,6 +37,17 @@ const ProductCategoryPage = ({
       }
     }
   }, [params.category, product.status.success])
+
+  if (
+    !form ||
+    !email ||
+    !customer ||
+    !cartContent ||
+    !error ||
+    !product ||
+    !clerkError
+  )
+    return <LoadingPage />
 
   return (
     <div className='pt-xl full flex-col-tl gap-md'>

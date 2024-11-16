@@ -12,7 +12,7 @@ import {
 } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { set, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 const ShopifyStatusState = createContext<{
   email: string | null
@@ -119,29 +119,41 @@ export function ShopifyStatusProvider({
     }, 1000)
 
     return () => clearTimeout(delayDebounceFn)
-  }, [email, setEligibilityStatus])
+  }, [email])
 
-  const value = useMemo(
-    () => ({
-      email,
-      setEmail,
-      eligibilityStatus,
-      setEligibilityStatus,
-      checkingAccountStatus,
-      setCheckingAccountStatus,
-      form,
-      checkAccountStatus,
-      clerkError,
-      setClerkError
-    }),
-    [
-      form,
-      email,
-      clerkError,
-      eligibilityStatus,
-      checkingAccountStatus,
-    ]
-  )
+  // const value = useMemo(
+  //   () => ({
+  //     email,
+  //     setEmail,
+  //     eligibilityStatus,
+  //     setEligibilityStatus,
+  //     checkingAccountStatus,
+  //     setCheckingAccountStatus,
+  //     form,
+  //     checkAccountStatus,
+  //     clerkError,
+  //     setClerkError
+  //   }),
+  //   [
+  //     form,
+  //     email,
+  //     clerkError,
+  //     eligibilityStatus,
+  //     checkingAccountStatus,
+  //   ]
+  // )
+  const value = {
+    email,
+    setEmail,
+    eligibilityStatus,
+    setEligibilityStatus,
+    checkingAccountStatus,
+    setCheckingAccountStatus,
+    form,
+    checkAccountStatus,
+    clerkError,
+    setClerkError
+  }
 
   return (
     <ShopifyStatusState.Provider value={value}>

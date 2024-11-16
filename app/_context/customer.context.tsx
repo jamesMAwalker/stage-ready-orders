@@ -32,43 +32,42 @@ export function CustomerProvider({
 }) {
   const { isSignedIn, user, isLoaded } = useUser()
   const [customer, setCustomer] = useState<any | null>(null)
-  
-  useEffect(() => {
-    if (isSignedIn && isLoaded) {
-      const email =
-        user?.primaryEmailAddress?.emailAddress ||
-        user.emailAddresses[0].emailAddress
 
-      {
-        ;(async () => {
-          try {
-            const res = await fetch('/api/customers', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                email
-              })
-            })
-            const data = await res.json()
+   useEffect(() => {
+     if (isSignedIn && isLoaded) {
+       const email =
+         user?.primaryEmailAddress?.emailAddress ||
+         user.emailAddresses[0].emailAddress
 
-            setCustomer(data.shopify_customer)
-          } catch (error: any) {
-            console.log('🚀 ~ ; ~ error:', error)
-          }
-        })()
-      }
-    }
-  }, [isSignedIn, isLoaded])
+       ;(async () => {
+         try {
+           const res = await fetch('/api/customers', {
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({
+               email
+             })
+           })
+           const data = await res.json()
 
-   const value = useMemo(
-     () => ({
-       customer,
-       setCustomer
-     }),
-     [customer, setCustomer]
-   )
+           setCustomer(data.shopify_customer)
+         } catch (error: any) {
+           console.log('🚀 ~ ; ~ error:', error)
+         }
+       })()
+     }
+   }, [isSignedIn, isLoaded, user])
+
+  // const value = useMemo(
+  //   () => ({
+  //     customer,
+  //     setCustomer
+  //   }),
+  //   [customer]
+  // )
+  const value = { customer, setCustomer };
 
   return (
     <CustomerState.Provider value={value}>

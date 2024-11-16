@@ -41,7 +41,6 @@ export function ProductProvider({
 }: {
   children: ReactNode
 }) {
-  const queryClient = useQueryClient()
   const { customer } = useCustomerContext()
   const [product, setProduct] = useState<{
     categories: IProductCategory[] | null
@@ -63,16 +62,40 @@ export function ProductProvider({
 
   useEffect(() => {
     if (customer && isSuccess && data) {
-      setProduct({
-        categories: data,
-        status: {
-          loading: isLoading,
-          success: isSuccess,
-          error: isError
+      setProduct((prev) => {
+        // Avoid unnecessary state updates
+        if (
+          prev.categories !== data ||
+          prev.status.success !== isSuccess ||
+          prev.status.loading !== isLoading ||
+          prev.status.error !== isError
+        ) {
+          return {
+            categories: data,
+            status: {
+              loading: isLoading,
+              success: isSuccess,
+              error: isError
+            }
+          }
         }
+        return prev
       })
     }
   }, [customer, isSuccess, isLoading, data, isError])
+
+  // useEffect(() => {
+  //   if (customer && isSuccess && data) {
+  //     setProduct({
+  //       categories: data,
+  //       status: {
+  //         loading: isLoading,
+  //         success: isSuccess,
+  //         error: isError
+  //       }
+  //     })
+  //   }
+  // }, [customer, isSuccess, isLoading, data, isError])
 
   useEffect(() => {
     if (product.categories && customer) {
@@ -80,12 +103,13 @@ export function ProductProvider({
     }
   }, [product.categories, customer])
 
-  const value = useMemo(
-    () => ({
-      product
-    }),
-    [product]
-  )
+  // const value = useMemo(
+  //   () => ({
+  //     product
+  //   }),
+  //   [product]
+  // )
+  const value = { product }
 
   return (
     <ProductState.Provider value={value}>

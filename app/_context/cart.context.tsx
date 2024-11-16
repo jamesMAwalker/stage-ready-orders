@@ -24,6 +24,19 @@ export function useCartContext() {
   return context
 }
 
+function updateCartLS(cartContent: ILineItem[] | null = null) {
+  localStorage.setItem(CART_LS_KEY, JSON.stringify(cartContent))
+}
+
+function checkLSforCart(setCartContent: any) {
+  const cart = localStorage.getItem(CART_LS_KEY)
+
+  setCartContent((prv: any) => {
+    if (!!cart) return prv;
+    return JSON.parse(cart ?? '{}')
+  })
+}
+
 export function CartProvider({
   children
 }: {
@@ -33,34 +46,24 @@ export function CartProvider({
     ILineItem[] | null
   >(null)
 
-  function checkLSforCart() {
-    const cart = localStorage.getItem(CART_LS_KEY)
-    if (cart) {
-      setCartContent(JSON.parse(cart))
-    }
-  }
-
-  function updateCartLS() {
-    localStorage.setItem(CART_LS_KEY, JSON.stringify(cartContent))
-  }
-
   useEffect(() => {
-    checkLSforCart()
+    checkLSforCart(setCartContent)
   }, [])
 
   useEffect(() => {
     if (cartContent !== null) {
-      updateCartLS()
+      updateCartLS(cartContent)
     }
   }, [cartContent])
 
-  const value = useMemo(
-    () => ({
-      cartContent,
-      setCartContent
-    }),
-    [cartContent, setCartContent]
-  )
+  // const value = useMemo(
+  //   () => ({
+  //     cartContent,
+  //     setCartContent
+  //   }),
+  //   [cartContent]
+  // )
+  const value = { cartContent, setCartContent }
 
   return (
     <CartState.Provider value={value}>
