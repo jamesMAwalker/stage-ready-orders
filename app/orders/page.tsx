@@ -2,14 +2,19 @@
 
 import { ProductCategoryList } from '@/components/product-category-list'
 import { useUser } from '@clerk/clerk-react'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { useEffect } from 'react';
 
 export default function OrderPage() {
   const { isSignedIn } = useUser()
 
-  if (!isSignedIn) {
-    redirect('/sign-in')
-  }
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isSignedIn) {
+      router.push('/sign-in') // Use router.push for navigation inside an effect
+    }
+  }, [isSignedIn, router])
 
   return (
     <>

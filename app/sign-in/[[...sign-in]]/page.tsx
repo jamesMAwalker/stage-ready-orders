@@ -14,14 +14,12 @@ import { SignInClerkVerificationStep } from '@/components/sign-in-clerk-verifica
 const SignInPage = () => {
   const { isSignedIn } = useUser()
   const router = useRouter()
-  // if (isSignedIn) {
-    //   redirect('/orders')
-    // }
-   useEffect(() => {
-     if (isSignedIn) {
-       router.push('/orders') // Use router.push for navigation inside an effect
-     }
-   }, [isSignedIn, router])
+
+  useEffect(() => {
+    if (isSignedIn) {
+      router.push('/orders') // Use router.push for navigation inside an effect
+    }
+  }, [isSignedIn, router])
 
   return (
     <SI.Root>
@@ -32,7 +30,8 @@ const SignInPage = () => {
             <p className='w-full text-center'>
               Enter your <strong>Stage Ready approved</strong>{' '}
               email to sign in. <br /> You will recieve an email
-              with a verification link to continue to the orders page.
+              with a verification link to continue to the orders
+              page.
             </p>
           </div>
         </div>

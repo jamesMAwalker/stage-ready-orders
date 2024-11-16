@@ -11,6 +11,8 @@ import { useCustomerContext } from '@/app/_context/customer.context'
 import { useCartContext } from '@/app/_context/cart.context'
 import { useErrorContext } from '@/app/_context/errors.context'
 import LoadingPage from '@/app/loading'
+import { useRouter } from 'next/navigation'
+import { useUser } from '@clerk/clerk-react'
 
 const ProductCategoryPage = ({
   params
@@ -26,6 +28,15 @@ const ProductCategoryPage = ({
   const [productCategory, setProductCategory] =
     useState<IProductCategory | null>(null)
 
+  const { isSignedIn } = useUser()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isSignedIn) {
+      router.push('/sign-in') // Use router.push for navigation inside an effect
+    }
+  }, [isSignedIn, router])
+
   useEffect(() => {
     if (product.status.success) {
       const categoryData = getProductCategoryFromLS(
@@ -37,17 +48,6 @@ const ProductCategoryPage = ({
       }
     }
   }, [params.category, product.status.success])
-
-  if (
-    !form ||
-    !email ||
-    !customer ||
-    !cartContent ||
-    !error ||
-    !product ||
-    !clerkError
-  )
-    return <LoadingPage />
 
   return (
     <div className='pt-xl full flex-col-tl gap-md'>
